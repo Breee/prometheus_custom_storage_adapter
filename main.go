@@ -132,11 +132,11 @@ func parseFlags() *config {
 	a.Flag("opentsdb-url", "The URL of the remote OpenTSDB server to send samples to. None, if empty.").
 		Default("").StringVar(&cfg.opentsdbURL)
 	a.Flag("influxdb-url", "The URL of the remote InfluxDB server to send samples to. None, if empty.").
-		Default("").StringVar(&cfg.influxdbURL)
+		Default("http://influxdb:8086/").StringVar(&cfg.influxdbURL)
 	a.Flag("influxdb.retention-policy", "The InfluxDB retention policy to use.").
 		Default("autogen").StringVar(&cfg.influxdbRetentionPolicy)
 	a.Flag("influxdb.username", "The username to use when sending samples to InfluxDB. The corresponding password must be provided via the INFLUXDB_PW environment variable.").
-		Default("").StringVar(&cfg.influxdbUsername)
+		Default("prometheus").StringVar(&cfg.influxdbUsername)
 	a.Flag("influxdb.database", "The name of the database to use for storing samples in InfluxDB.").
 		Default("prometheus").StringVar(&cfg.influxdbDatabase)
 	a.Flag("send-timeout", "The timeout to use when sending samples to the remote storage.").
