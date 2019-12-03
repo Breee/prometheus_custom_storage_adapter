@@ -42,8 +42,8 @@ import (
 	"github.com/prometheus/common/promlog/flag"
 
 	"github.com/Breee/prometheus_custom_storage_adapter/influxdb"
-	"github.com/prometheus/prometheus/documentation/examples/remote_storage/remote_storage_adapter/graphite"
-	"github.com/prometheus/prometheus/documentation/examples/remote_storage/remote_storage_adapter/opentsdb"
+	"github.com/Breee/prometheus_custom_storage_adapter/graphite"
+	"github.com/Breee/prometheus_custom_storage_adapter/opentsdb"
 	"github.com/prometheus/prometheus/prompb"
 )
 
