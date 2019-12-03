@@ -36,7 +36,7 @@ import (
 	"github.com/prometheus/common/model"
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	influx "github.com/influxdata/influxdb/tree/1.7/client/v2"
+	influx "github.com/influxdata/influxdb/client/v2@1.7"
 
 	"github.com/prometheus/common/promlog"
 	"github.com/prometheus/common/promlog/flag"
