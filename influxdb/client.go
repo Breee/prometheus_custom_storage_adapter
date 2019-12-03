@@ -23,7 +23,7 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/log/level"
 	
-	influx "github.com/influxdata/influxdb/1.7/client/v2"
+	influx "github.com/influxdata/influxdb-client-go"
 
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
