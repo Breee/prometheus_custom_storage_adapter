@@ -43,6 +43,7 @@ type Client struct {
 
 // NewClient creates a new Client.
 func NewClient(logger log.Logger, conf influx.HTTPConfig, db string, rp string) *Client {
+	level.Info(logger).Log("Creating new Influxdb client")
 	c, err := influx.NewHTTPClient(conf)
 	// Currently influx.NewClient() *should* never return an error.
 	if err != nil {
@@ -81,6 +82,7 @@ func tagsFromMetric(m model.Metric) map[string]string {
 
 // Write sends a batch of samples to InfluxDB via its HTTP API.
 func (c *Client) Write(samples model.Samples) error {
+	level.Info(c.logger).Log("samples", samples)
 	points := make([]*influx.Point, 0, len(samples))
 	for _, s := range samples {
 		v := float64(s.Value)
@@ -114,6 +116,7 @@ func (c *Client) Write(samples model.Samples) error {
 }
 
 func (c *Client) Read(req *prompb.ReadRequest) (*prompb.ReadResponse, error) {
+	level.Info(c.logger).Log("req", req)
 	labelsToSeries := map[string]*prompb.TimeSeries{}
 	for _, q := range req.Queries {
 		command, err := c.buildCommand(q)
