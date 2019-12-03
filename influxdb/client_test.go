@@ -22,7 +22,7 @@ import (
 	"testing"
 	"time"
 
-	influx "github.com/influxdata/influxdb-client-go"
+	influx "github.com/influxdata/influxdb1-client/v2"
 
 	"github.com/prometheus/common/model"
 )
