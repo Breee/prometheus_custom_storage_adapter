@@ -1,31 +1,19 @@
-# Start from the latest golang base image
-FROM golang:latest as builder
+FROM golang:1.13-alpine as builder
 
-# Add Maintainer Info
-LABEL maintainer="Breee@github <loeffler.uni@gmail.com"
-
-# Set the Current Working Directory inside the container
 WORKDIR /app
-
-# Copy the source from the current directory to the Working Directory inside the container
 COPY . /app
 
-# Build the Go app
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+RUN apk update && apk add git
+RUN go get -d -v
+RUN CGO_ENABLED=0 GOOS=linux GOPROXY=https://proxy.golang.org go build -o app main.go
 
+FROM alpine:latest
+RUN addgroup -S app && adduser -S app -G app
+USER app
+WORKDIR /app
 
-######## Start a new stage from scratch #######
-FROM alpine:latest  
+COPY --from=builder /app/app .
 
-RUN apk --no-cache add ca-certificates
-
-WORKDIR /root/
-
-# Copy the Pre-built binary file from the previous stage
-COPY --from=builder /app/main .
-
-# Expose port 8080 to the outside world
 EXPOSE 9201
+ENTRYPOINT ["./app"]
 
-# Command to run the executable
-CMD ["./main"] 
